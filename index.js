@@ -87,3 +87,46 @@ var index = indexOfMinimum(array, 2);
 //  "index" has value 4
 println("The index of the minimum value of the subarray starting at index 2 is " + index + "."  );
 Program.assertEqual(index, 4);
+
+
+// ---- PUTTING IT ALL TOGETHER (SWAP, FIND MIN VALUE SELECTION SORT) --- \\ 
+
+var swap = function(array, firstIndex, secondIndex) {
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+};
+
+var indexOfMinimum = function(array, startIndex) {
+
+    var minValue = array[startIndex];
+    var minIndex = startIndex;
+
+    for(var i = minIndex + 1; i < array.length; i++) {
+        if(array[i] < minValue) {
+            minIndex = i;
+            minValue = array[i];
+        }
+    } 
+    return minIndex;
+}; 
+
+var selectionSort = function(array) {
+    var temp;
+    for (var i = 0; i < array.length; i++){
+     temp = indexOfMinimum(array, i);
+        swap(array, i, temp);
+    }
+
+};
+
+var array = [22, 11, 99, 88, 9, 7, 42];
+selectionSort(array);
+println("Array after sorting:  " + array);
+
+Program.assertEqual(array, [7, 9, 11, 22, 42, 88, 99]);
+
+
+var arr = [22,3,4,23,45,6,4,2];
+selectionSort(arr);
+Program.assertEqual(arr, [2,3,4,4,6,22,23,45]);
